@@ -1,0 +1,37 @@
+Test_14_Automation_UIA() {
+    local
+    global RDA_Automation, Yunit
+
+    RDA_Log_Debug(A_ThisFunc)
+
+    automation := new RDA_Automation()
+    automation.setActionDelay(500)
+    windows := automation.windows()
+
+    ; Abrir notepad / escribir / cambiar tipo de fuente
+    Run notepad.exe
+    win := windows.waitOne({process: "notepad.exe"})
+    sleep 1000
+    win.sendKeys("prueba")
+    ; win.move(A_ScreenWidth / 2 , A_ScreenHeight/ 2)
+    win.sendKeys("^e")
+    ; win.resize(600,600)
+    uiaWin := win.asUIAElement()
+    RDA_Log_Debug(uiaWin.dumpXML())
+    btnEditar := uiaWin.findOne("//MenuItem[@Name=""Editar""]")
+    sleep 1000
+    btnEditar.click()
+    win.sendKeys("{Up}{Enter}")
+    ; win.sendKeys("{Enter}")
+    RDA_Log_Debug(uiaWin.dumpXML())
+    sleep 2000
+    familia := uiaWin.findOne("//ComboBox[@name=""Familia""]")
+    familia.click()
+    win.sendKeys("Arial")
+    win.sendKeys("{Enter}")
+    RDA_Log_Debug(uiaWin.dumpXML())
+    Sleep 1000
+    grupoFuente := uiaWin.findOne("//Group[@name=""Fuente""]")
+    grupoFuente.click()
+    win.sendKeys("{Backspace}")
+}
