@@ -4,7 +4,7 @@ getExcelData(){
     global RDA_Automation
 
     ; Open excel
-    Run "C:\Users\294492\Documents\AutoHotkey\rda-ahk-main\test\pruebas.xlsx" ; Path to excel file
+    Run "C:\Users\User\Documents\AutoHotkey\rda-ahk-main\test\pruebas.xlsx" ; Path to excel file
     WinWaitActive, ahk_class XLMAIN
     sleep 1000
     ; Create object and get data
